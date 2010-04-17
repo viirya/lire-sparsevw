@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/caliph-emir/!svn/ver/30/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd
+END
+CompactCEDDQuant.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/CompactCEDDQuant.java
+END
+Fuzzy10Bin.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/caliph-emir/!svn/ver/30/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/Fuzzy10Bin.java
+END
+FuzzyRules.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/FuzzyRules.java
+END
+Fuzzy24Bin.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/caliph-emir/!svn/ver/30/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/Fuzzy24Bin.java
+END
+Neighborhood.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/Neighborhood.java
+END
+CEDDQuant.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/CEDDQuant.java
+END
+MaskResults.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/MaskResults.java
+END
+RGB2HSV.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/caliph-emir/!svn/ver/30/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/cedd/RGB2HSV.java
+END

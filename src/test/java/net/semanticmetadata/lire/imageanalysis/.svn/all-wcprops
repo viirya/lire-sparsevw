@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/caliph-emir/!svn/ver/64/lire/src/test/java/net/semanticmetadata/lire/imageanalysis
+END
+CEDDTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/caliph-emir/!svn/ver/63/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/CEDDTest.java
+END
+EdgeHistogramTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svnroot/caliph-emir/!svn/ver/53/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/EdgeHistogramTest.java
+END
+AutoColorCorrelogramTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/caliph-emir/!svn/ver/44/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/AutoColorCorrelogramTest.java
+END
+FCTHTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/caliph-emir/!svn/ver/19/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/FCTHTest.java
+END
+FuzzyColorHistogramTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svnroot/caliph-emir/!svn/ver/37/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/FuzzyColorHistogramTest.java
+END
+AttentionModelTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svnroot/caliph-emir/!svn/ver/64/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/AttentionModelTest.java
+END
+SimpleHistogramTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/caliph-emir/!svn/ver/25/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/SimpleHistogramTest.java
+END
+TamuraTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/caliph-emir/!svn/ver/8/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/TamuraTest.java
+END
+GaborTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/caliph-emir/!svn/ver/19/lire/src/test/java/net/semanticmetadata/lire/imageanalysis/GaborTest.java
+END

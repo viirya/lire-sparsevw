@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/caliph-emir/!svn/ver/57/lire/src/main/java/net/semanticmetadata/lire/impl
+END
+SimpleDocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/caliph-emir/!svn/ver/57/lire/src/main/java/net/semanticmetadata/lire/impl/SimpleDocumentBuilder.java
+END
+ChainedDocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/caliph-emir/!svn/ver/53/lire/src/main/java/net/semanticmetadata/lire/impl/ChainedDocumentBuilder.java
+END
+CEDDDocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/caliph-emir/!svn/ver/57/lire/src/main/java/net/semanticmetadata/lire/impl/CEDDDocumentBuilder.java
+END
+DocumentFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/impl/DocumentFactory.java
+END
+SimpleImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/impl/SimpleImageSearcher.java
+END
+SimpleImageSearchHits.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/7/lire/src/main/java/net/semanticmetadata/lire/impl/SimpleImageSearchHits.java
+END
+SimpleImageDuplicates.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/impl/SimpleImageDuplicates.java
+END
+SiftDocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/caliph-emir/!svn/ver/53/lire/src/main/java/net/semanticmetadata/lire/impl/SiftDocumentBuilder.java
+END
+ParallelImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/caliph-emir/!svn/ver/35/lire/src/main/java/net/semanticmetadata/lire/impl/ParallelImageSearcher.java
+END
+CEDDImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/caliph-emir/!svn/ver/57/lire/src/main/java/net/semanticmetadata/lire/impl/CEDDImageSearcher.java
+END
+GenericDocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/caliph-emir/!svn/ver/57/lire/src/main/java/net/semanticmetadata/lire/impl/GenericDocumentBuilder.java
+END
+CorrelogramDocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svnroot/caliph-emir/!svn/ver/53/lire/src/main/java/net/semanticmetadata/lire/impl/CorrelogramDocumentBuilder.java
+END
+SimpleResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/caliph-emir/!svn/ver/7/lire/src/main/java/net/semanticmetadata/lire/impl/SimpleResult.java
+END
+SiftLocalFeatureHistogramImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/impl/SiftLocalFeatureHistogramImageSearcher.java
+END
+GenericImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/57/lire/src/main/java/net/semanticmetadata/lire/impl/GenericImageSearcher.java
+END
+CorrelogramImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/caliph-emir/!svn/ver/6/lire/src/main/java/net/semanticmetadata/lire/impl/CorrelogramImageSearcher.java
+END

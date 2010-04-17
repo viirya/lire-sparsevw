@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/caliph-emir/!svn/ver/27/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap
+END
+DistanceCalculator.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap/DistanceCalculator.java
+END
+SavedPivots.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/caliph-emir/!svn/ver/22/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap/SavedPivots.java
+END
+VisualDescriptorDistanceCalculator.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap/VisualDescriptorDistanceCalculator.java
+END
+ArrayFastmapDistanceMatrix.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap/ArrayFastmapDistanceMatrix.java
+END
+FastMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/caliph-emir/!svn/ver/22/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap/FastMap.java
+END
+FastmapDistanceMatrix.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap/FastmapDistanceMatrix.java
+END
+NocacheFastmapDistanceMatrix.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svnroot/caliph-emir/!svn/ver/27/lire/src/main/java/net/semanticmetadata/lire/indexing/fastmap/NocacheFastmapDistanceMatrix.java
+END

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/caliph-emir/!svn/ver/64/lire/src/main/java/net/semanticmetadata/lire/imageanalysis
+END
+CEDD.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/caliph-emir/!svn/ver/57/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/CEDD.java
+END
+JCD.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/JCD.java
+END
+JpegCoefficientHistogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/caliph-emir/!svn/ver/37/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/JpegCoefficientHistogram.java
+END
+FuzzyColorHistogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/caliph-emir/!svn/ver/37/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/FuzzyColorHistogram.java
+END
+AutoColorCorrelogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svnroot/caliph-emir/!svn/ver/43/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/AutoColorCorrelogram.java
+END
+ScalableColor.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/caliph-emir/!svn/ver/25/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/ScalableColor.java
+END
+SimpleColorHistogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svnroot/caliph-emir/!svn/ver/63/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/SimpleColorHistogram.java
+END
+LireFeature.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/10/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/LireFeature.java
+END
+GeneralColorLayout.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svnroot/caliph-emir/!svn/ver/52/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/GeneralColorLayout.java
+END
+ColorLayout.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/25/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/ColorLayout.java
+END
+HSVColorHistogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svnroot/caliph-emir/!svn/ver/52/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/HSVColorHistogram.java
+END
+EdgeHistogram.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/caliph-emir/!svn/ver/25/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/EdgeHistogram.java
+END
+FCTH.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/FCTH.java
+END
+Tamura.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/caliph-emir/!svn/ver/53/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/Tamura.java
+END
+Gabor.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/caliph-emir/!svn/ver/19/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/Gabor.java
+END

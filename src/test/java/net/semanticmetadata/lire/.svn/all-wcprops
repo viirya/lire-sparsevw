@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/caliph-emir/!svn/ver/64/lire/src/test/java/net/semanticmetadata/lire
+END
+TestImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/caliph-emir/!svn/ver/53/lire/src/test/java/net/semanticmetadata/lire/TestImageSearcher.java
+END
+TestImageSearcherWeighted.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/53/lire/src/test/java/net/semanticmetadata/lire/TestImageSearcherWeighted.java
+END
+RuntimeTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/caliph-emir/!svn/ver/57/lire/src/test/java/net/semanticmetadata/lire/RuntimeTest.java
+END
+CreateIndexTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/caliph-emir/!svn/ver/57/lire/src/test/java/net/semanticmetadata/lire/CreateIndexTest.java
+END
+DocumentBuilderFactoryTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/3/lire/src/test/java/net/semanticmetadata/lire/DocumentBuilderFactoryTest.java
+END

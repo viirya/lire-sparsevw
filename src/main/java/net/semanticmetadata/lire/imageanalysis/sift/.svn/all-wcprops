@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/caliph-emir/!svn/ver/64/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift
+END
+Model.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/Model.java
+END
+FloatArray2DScaleOctave.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/FloatArray2DScaleOctave.java
+END
+FloatArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/FloatArray.java
+END
+SiftFeatureHistogramBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svnroot/caliph-emir/!svn/ver/59/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/SiftFeatureHistogramBuilder.java
+END
+PointMatch.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/PointMatch.java
+END
+ImageArrayConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/ImageArrayConverter.java
+END
+TModel2D.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/TModel2D.java
+END
+Extractor.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/Extractor.java
+END
+KMeans.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/64/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/KMeans.java
+END
+FloatArray2DSIFT.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/FloatArray2DSIFT.java
+END
+Cluster.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/caliph-emir/!svn/ver/64/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/Cluster.java
+END
+Filter.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/Filter.java
+END
+FloatArray2DScaleOctaveDoGDetector.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/FloatArray2DScaleOctaveDoGDetector.java
+END
+Point.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/Point.java
+END
+FloatArray2D.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/FloatArray2D.java
+END
+Feature.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/Feature.java
+END
+TRModel2D.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/caliph-emir/!svn/ver/28/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/sift/TRModel2D.java
+END

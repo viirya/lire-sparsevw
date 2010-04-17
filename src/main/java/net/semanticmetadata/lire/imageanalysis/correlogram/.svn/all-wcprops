@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/caliph-emir/!svn/ver/45/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/correlogram
+END
+IAutoCorrelogramFeatureExtractor.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svnroot/caliph-emir/!svn/ver/40/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/correlogram/IAutoCorrelogramFeatureExtractor.java
+END
+NaiveAutoCorrelogramExtraction.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svnroot/caliph-emir/!svn/ver/45/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/correlogram/NaiveAutoCorrelogramExtraction.java
+END
+MLuxAutoCorrelogramExtraction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svnroot/caliph-emir/!svn/ver/42/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/correlogram/MLuxAutoCorrelogramExtraction.java
+END
+DynamicProgrammingAutoCorrelogramExtraction.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svnroot/caliph-emir/!svn/ver/45/lire/src/main/java/net/semanticmetadata/lire/imageanalysis/correlogram/DynamicProgrammingAutoCorrelogramExtraction.java
+END

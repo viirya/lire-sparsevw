@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/caliph-emir/!svn/ver/64/lire/src/main/java/net/semanticmetadata/lire
+END
+ImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/ImageSearcher.java
+END
+ImageDuplicates.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/ImageDuplicates.java
+END
+ImageSearchHits.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/ImageSearchHits.java
+END
+AbstractImageSearcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/AbstractImageSearcher.java
+END
+DocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/caliph-emir/!svn/ver/58/lire/src/main/java/net/semanticmetadata/lire/DocumentBuilder.java
+END
+ImageSearcherFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/caliph-emir/!svn/ver/30/lire/src/main/java/net/semanticmetadata/lire/ImageSearcherFactory.java
+END
+AbstractDocumentBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/AbstractDocumentBuilder.java
+END
+DocumentBuilderFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/caliph-emir/!svn/ver/30/lire/src/main/java/net/semanticmetadata/lire/DocumentBuilderFactory.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/caliph-emir/!svn/ver/3/lire/src/main/java/net/semanticmetadata/lire/package.html
+END

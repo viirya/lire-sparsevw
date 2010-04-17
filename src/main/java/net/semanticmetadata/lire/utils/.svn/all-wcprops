@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/caliph-emir/!svn/ver/60/lire/src/main/java/net/semanticmetadata/lire/utils
+END
+FileUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/caliph-emir/!svn/ver/52/lire/src/main/java/net/semanticmetadata/lire/utils/FileUtils.java
+END
+ImageUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/caliph-emir/!svn/ver/52/lire/src/main/java/net/semanticmetadata/lire/utils/ImageUtils.java
+END
+MetricsUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/caliph-emir/!svn/ver/52/lire/src/main/java/net/semanticmetadata/lire/utils/MetricsUtils.java
+END
+SerializationUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/caliph-emir/!svn/ver/60/lire/src/main/java/net/semanticmetadata/lire/utils/SerializationUtils.java
+END
