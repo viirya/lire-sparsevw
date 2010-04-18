@@ -36,14 +36,17 @@ public class CreateIndex {
             String strLine;
             while ((strLine = br.readLine()) != null)   {
                 StringTokenizer tokenizer = new StringTokenizer(strLine," %");
-
-                if (tokenizer.countTokens() == 1)
-                    continue;
-
-                String raw_feature_vector = tokenizer.nextToken();
-                String identifier = tokenizer.nextToken();
-
-                if (raw_feature_vector == null || raw_feature_vector.length() == 0) {
+                String raw_feature_vector = null;
+                String identifier = null;
+                if (tokenizer.countTokens() == 1) {
+                    raw_feature_vector = "";
+                    identifier = tokenizer.nextToken();
+                    //continue;
+                } else {
+                    raw_feature_vector = tokenizer.nextToken();
+                    identifier = tokenizer.nextToken();
+                }
+                if (raw_feature_vector == null) { // || raw_feature_vector.length() == 0) {
                     System.out.println("Empty feature: " + identifier);
                     continue;
                 }

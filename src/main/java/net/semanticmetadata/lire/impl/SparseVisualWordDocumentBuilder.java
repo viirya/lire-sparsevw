@@ -42,7 +42,7 @@ import java.util.*;
  * <br>Date: 17.04.2010
  * <br>Time: 
  *
- * @author 
+ * @author viirya, viirya@gmail.com 
  */
 public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
     private Logger logger = Logger.getLogger(SparseVisualWordDocumentBuilder.class.getName());
@@ -52,17 +52,21 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
     }
     
 
-    private String arrayToVisualWordString(int[] iarray) {
+    private String arrayToVisualWordString(int[] iarray, String prefix) {
         StringBuilder sb = new StringBuilder(1024);
         for (int i = 0; i < iarray.length; i++) {
-            sb.append('v');
+            sb.append(prefix + 'v');
             sb.append(iarray[i]);
             sb.append(' ');
         }
         return sb.toString();
     }                              
-
-    private String createStringRepresentation(String vec) {
+ 
+    public String createStringRepresentation(String vec) {
+        return createStringRepresentation(vec, "");
+    }
+ 
+    public String createStringRepresentation(String vec, String prefix) {
         if (vec == null)
           return null;
 
@@ -76,7 +80,7 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
                 tokenizer.nextToken();  
         }
 
-        String index_feature = arrayToVisualWordString(dim_array); 
+        String index_feature = arrayToVisualWordString(dim_array, prefix); 
 
         return index_feature;
     }
@@ -97,8 +101,11 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
         
         Document doc = new Document();
 
-        if (index_feature != null)
+        if (index_feature != null) {
             doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, index_feature, Field.Store.YES, Field.Index.ANALYZED));
+            doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW, raw_feature_vector, Field.Store.YES, Field.Index.NOT_ANALYZED));
+        }
+             
 
         if (identifier != null)
             doc.add(new Field(DocumentBuilder.FIELD_NAME_IDENTIFIER, identifier, Field.Store.YES, Field.Index.NOT_ANALYZED));

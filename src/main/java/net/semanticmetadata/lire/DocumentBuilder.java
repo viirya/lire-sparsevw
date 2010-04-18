@@ -78,6 +78,7 @@ public interface DocumentBuilder {
     public static final String FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM = "featureSiftHistogram";
     public static final String FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_VISUAL_WORDS = "featureSiftHistogramVWords";
     public static final String FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS = "featureSiftHistogramSparseVWords";
+    public static final String FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW = "featureSiftHistogramSparseVWordsRaw";
     public static final String FIELD_NAME_IDENTIFIER = "descriptorImageIdentifier";
     public static final String FIELD_NAME_CEDD_FAST = "featureCEDDfast";
 

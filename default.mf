@@ -1,4 +1,4 @@
 Class-Path: lib/lucene-core-3.0.1.jar lib/caliph-emir-cbir.jar
-            Build-Date: 17.04.2010 06:53 PM
-            Build-Number: 125
+            Build-Date: 18.04.2010 07:00 PM
+            Build-Number: 178
         
