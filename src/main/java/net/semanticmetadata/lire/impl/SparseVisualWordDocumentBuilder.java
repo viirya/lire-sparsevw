@@ -55,18 +55,20 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
     private String arrayToVisualWordString(int[] iarray, String prefix) {
         StringBuilder sb = new StringBuilder(1024);
         for (int i = 0; i < iarray.length; i++) {
-            sb.append(prefix + 'v');
-            sb.append(iarray[i]);
-            sb.append(' ');
+            if (iarray[i] > 0) {
+                sb.append(prefix + 'v');
+                sb.append(iarray[i]);
+               sb.append(' ');
+            }
         }
         return sb.toString();
     }                              
  
     public String createStringRepresentation(String vec) {
-        return createStringRepresentation(vec, "");
+        return createStringRepresentation(vec, "", 0.0d);
     }
  
-    public String createStringRepresentation(String vec, String prefix) {
+    public String createStringRepresentation(String vec, String prefix, double threshold) {
         if (vec == null)
           return null;
 
@@ -75,9 +77,12 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
         int[] dim_array = new int[tokenizer.countTokens() / 2];
         int count = 0;
         while (tokenizer.hasMoreTokens()) {
-            dim_array[count++] = Integer.parseInt(tokenizer.nextToken()); 
-            if (tokenizer.hasMoreTokens())
-                tokenizer.nextToken();  
+            int dimension = Integer.parseInt(tokenizer.nextToken());
+            if (tokenizer.hasMoreTokens()) {
+                double value = Double.parseDouble(tokenizer.nextToken());
+                if (value >= threshold)  
+                    dim_array[count++] = dimension; 
+            }
         }
 
         String index_feature = arrayToVisualWordString(dim_array, prefix); 
@@ -89,7 +94,7 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
         return null;
     }
 
-    public Document createDocument(String feature_vector, String identifier) {
+    public Document createDocument(String feature_vector, String identifier, double threshold) {
         assert (feature_vector != null);
         System.out.println("Starting to parse feature vector.");
 
@@ -97,7 +102,7 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
         //String raw_feature_vector = tokenizer.nextToken();
         //String identifier = tokenizer.nextToken();
         String raw_feature_vector = feature_vector;
-        String index_feature = createStringRepresentation(raw_feature_vector);
+        String index_feature = createStringRepresentation(raw_feature_vector, "", threshold);
         
         Document doc = new Document();
 

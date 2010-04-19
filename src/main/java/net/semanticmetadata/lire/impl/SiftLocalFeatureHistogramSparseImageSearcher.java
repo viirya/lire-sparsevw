@@ -40,6 +40,11 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
     private TreeSet<SimpleResult> docs;
     private int maxHits;
 
+    private QueryParser qp = null;
+    private QueryParser qp_identifier = null;
+    private IndexSearcher isearcher = null;
+    private boolean inited = false;
+
     public SiftLocalFeatureHistogramSparseImageSearcher(int maxHits) {
         this.maxHits = maxHits;
         docs = new TreeSet<SimpleResult>();
@@ -53,55 +58,69 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
         throw new UnsupportedOperationException("Not feasible for local feature histograms.");
     }
 
-    public List<Map.Entry<String, Double>> search(int docID, IndexReader reader) throws IOException {
+    public List<Map.Entry<String, Double>> search(int docID, IndexReader reader, double threshold, boolean benchmark) throws IOException {
         String query = reader.document(docID).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS)[0];
 
-        return search(query, reader);
+        return search(query, reader, threshold, benchmark);
     }
 
-    public List<Map.Entry<String, Double>> searchByIdentifier(String docIdentifier, IndexReader reader) throws IOException {
-        //System.out.println("identifier = " + docIdentifier);
+    public List<Map.Entry<String, Double>> searchByIdentifier(String docIdentifier, IndexReader reader, double threshold, boolean benchmark) throws IOException {
+        System.out.println("identifier = " + docIdentifier);
         
+        if (inited != true) { 
+            qp_identifier = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_IDENTIFIER, new WhitespaceAnalyzer());
+            isearcher = new IndexSearcher(reader);
+        }
+
+        /*
         QueryParser qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_IDENTIFIER, new WhitespaceAnalyzer());
         IndexSearcher isearcher = new IndexSearcher(reader);
+        */
 
         String feature_vector = null;
         try {
-            TopDocs docs = isearcher.search(qp.parse(docIdentifier), 1);
+            TopDocs docs = isearcher.search(qp_identifier.parse(docIdentifier), 1);
             feature_vector = reader.document(docs.scoreDocs[0].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         if (feature_vector != null)
-            return search(feature_vector, reader);
+            return search(feature_vector, reader, threshold, benchmark);
 
         return null; 
     }
 
 
-    public List<Map.Entry<String, Double>> searchByRawFeatures(String feature_vec, IndexReader reader) throws IOException {
+    public List<Map.Entry<String, Double>> searchByRawFeatures(String feature_vec, IndexReader reader, double threshold, boolean benchmark) throws IOException {
         SparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getSparseVisualWordDocumentBuilder();
         String features = builder.createStringRepresentation(feature_vec);
         if (features != null)
-            return search(features, reader);
+            return search(features, reader, threshold, benchmark);
 
         return null;
     }
 
-    public List<Map.Entry<String, Double>> search(String feature_vector, IndexReader reader) throws IOException {
+    public void init(IndexReader reader) throws IOException {
+        qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
+        qp_identifier = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_IDENTIFIER, new WhitespaceAnalyzer());
+        isearcher = new IndexSearcher(reader);
+        inited = true;
+    }
+
+    public List<Map.Entry<String, Double>> search(String feature_vector, IndexReader reader, double threshold, boolean benchmark) throws IOException {
 
         BooleanQuery.setMaxClauseCount(100000);
         SparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getSparseVisualWordDocumentBuilder();
-        String query = builder.createStringRepresentation(feature_vector, "");
-        if (query == null)
+        String query = builder.createStringRepresentation(feature_vector, "", threshold);
+        if (query == null || query.length() == 0)
             return null;
- 
-        //System.out.println("query = " + query);
-        
-        QueryParser qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
-        IndexSearcher isearcher = new IndexSearcher(reader);
+        System.out.println("query = " + query);
 
+        if (inited != true) { 
+            qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
+            isearcher = new IndexSearcher(reader);
+        }
         
         isearcher.setSimilarity(new Similarity() {
             @Override
@@ -138,7 +157,11 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
 
         HashMap ret = new HashMap();
         try {
+            long startTime = System.currentTimeMillis();
             TopDocs docs = isearcher.search(qp.parse(query), maxHits);
+            long stopTime = System.currentTimeMillis();
+            if (benchmark == true)
+                System.out.println("Total time: " + (stopTime - startTime) + " ms");
             //System.out.println("found: " + docs.scoreDocs.length + " docs.");
             for (int i = 0; i < docs.scoreDocs.length; i++) {
                 //System.out.println("ret " + i + " ");

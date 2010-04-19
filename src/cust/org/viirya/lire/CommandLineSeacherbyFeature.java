@@ -47,7 +47,7 @@ public class CommandLineSeacherbyFeature {
         }
         */
 
-        List<Map.Entry<String, Double>> list = searcher.search(feature, reader);
+        List<Map.Entry<String, Double>> list = searcher.search(feature, reader, 0.005d, true);
         for (Map.Entry<String, Double> entry: list) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
             //ret.put(entry.getKey(), entry.getValue().toString());

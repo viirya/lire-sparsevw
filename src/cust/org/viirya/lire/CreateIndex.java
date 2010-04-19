@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CreateIndex {
 
-    public static void createIndex(String index_path, String feature_filepath) throws IOException {
+    public static void createIndex(String index_path, String feature_filepath, double threshold) throws IOException {
         SparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getSparseVisualWordDocumentBuilder();
         IndexWriter iw = new IndexWriter(FSDirectory.open(new File(index_path)), new SimpleAnalyzer(), IndexWriter.MaxFieldLength.UNLIMITED);
 
@@ -53,7 +53,7 @@ public class CreateIndex {
 
                 System.out.println("Indexing " + identifier + " ...");
 
-                Document doc = builder.createDocument(raw_feature_vector, identifier);
+                Document doc = builder.createDocument(raw_feature_vector, identifier, threshold);
                 iw.addDocument(doc);
             }
             in.close();
@@ -66,11 +66,11 @@ public class CreateIndex {
     }
 
     public static void main (String[] args) throws IOException {
-      if (args.length != 2) {
+      if (args.length != 3) {
           System.err.println("Usage: CreateIndex [index path] [feature filepath]");
           System.exit(1);
       }
-      createIndex(args[0], args[1]);
+      createIndex(args[0], args[1], Double.parseDouble(args[2]));
     }
 
 }

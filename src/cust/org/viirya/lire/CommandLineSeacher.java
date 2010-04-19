@@ -45,7 +45,7 @@ public class CommandLineSeacher {
             System.out.println(me.getKey() + " : " + me.getValue() );
         }
         */
-        List<Map.Entry<String, Double>> list = searcher.searchByIdentifier(identifier, reader);
+        List<Map.Entry<String, Double>> list = searcher.searchByIdentifier(identifier, reader, 0.005d, true);
         for (Map.Entry<String, Double> entry: list) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
             //ret.put(entry.getKey(), entry.getValue().toString());
