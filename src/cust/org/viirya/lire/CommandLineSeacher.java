@@ -31,7 +31,7 @@ import java.util.*;
 public class CommandLineSeacher {
 
 
-    public static void search(String index_path, String identifier) throws IOException {
+    public static void search(String index_path, String identifier, String threshold) throws IOException {
         IndexReader reader = IndexReader.open(FSDirectory.open(new File(index_path)));
         SiftLocalFeatureHistogramSparseImageSearcher searcher = new SiftLocalFeatureHistogramSparseImageSearcher(100);
         /*
@@ -45,7 +45,7 @@ public class CommandLineSeacher {
             System.out.println(me.getKey() + " : " + me.getValue() );
         }
         */
-        List<Map.Entry<String, Double>> list = searcher.searchByIdentifier(identifier, reader, 0.005d, true);
+        List<Map.Entry<String, Double>> list = searcher.searchByIdentifier(identifier, reader, Double.parseDouble(threshold), true);
         for (Map.Entry<String, Double> entry: list) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
             //ret.put(entry.getKey(), entry.getValue().toString());
@@ -54,11 +54,11 @@ public class CommandLineSeacher {
     }
 
     public static void main (String[] args) throws IOException {
-      if (args.length != 2) {
+      if (args.length != 3) {
           System.err.println("Usage: CommandLineSeacher [index path] [docIdentifier]");
           System.exit(1);
       }
-      search(args[0], args[1]);
+      search(args[0], args[1], args[2]);
     }
 
 }

@@ -12,12 +12,15 @@ import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Similarity;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
@@ -140,36 +143,50 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
 
             @Override
             public float tf(float v) {
-                return v;  //To change body of implemented methods use File | Settings | File Templates.
+                return 1.0f;
+                //return v;  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
             public float idf(int docfreq, int numdocs) {
-                return 1f;  //To change body of implemented methods use File | Settings | File Templates.
+                return 1.0f;  //To change body of implemented methods use File | Settings | File Templates.
 //                return (float) (1d+Math.log((double) numdocs/(double) docfreq));  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
             public float coord(int i, int i1) {
-                return 1;  //To change body of implemented methods use File | Settings | File Templates.
+                return (float)i / i1; 
+                //return 1;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });
 
+        BooleanQuery bq = new BooleanQuery();
+        String[] terms = query.split(" ");
+        TermQuery tq = null;
+        for (String term: terms) {
+            System.out.println("term: " + term);
+            tq = new TermQuery(new Term(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, term)); 
+            bq.add(tq, BooleanClause.Occur.SHOULD);
+        }
+        System.out.println("query = " + bq.toString());
+
         HashMap ret = new HashMap();
-        try {
+        //try {
             long startTime = System.currentTimeMillis();
-            TopDocs docs = isearcher.search(qp.parse(query), maxHits);
+            //TopDocs docs = isearcher.search(qp.parse(query), maxHits); //reader.numDocs());
+            TopDocs docs = isearcher.search(bq, maxHits); //reader.numDocs());
+ 
             long stopTime = System.currentTimeMillis();
             if (benchmark == true)
                 System.out.println("Total time: " + (stopTime - startTime) + " ms");
-            //System.out.println("found: " + docs.scoreDocs.length + " docs.");
+            System.out.println("found: " + docs.scoreDocs.length + " docs.");
             for (int i = 0; i < docs.scoreDocs.length; i++) {
                 //System.out.println("ret " + i + " ");
                 ret.put(reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0], reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0]); //docs.scoreDocs[i].score);
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        //} catch (ParseException e) {
+        //    e.printStackTrace();
+        //}
 
         return calculateDistance(feature_vector, ret);
 
