@@ -21,6 +21,8 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
@@ -159,7 +161,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
                 //return 1;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });
-
+        /*
         BooleanQuery bq = new BooleanQuery();
         String[] terms = query.split(" ");
         TermQuery tq = null;
@@ -169,12 +171,16 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
             bq.add(tq, BooleanClause.Occur.SHOULD);
         }
         System.out.println("query = " + bq.toString());
+        */
 
         HashMap ret = new HashMap();
-        //try {
+        try {
             long startTime = System.currentTimeMillis();
-            //TopDocs docs = isearcher.search(qp.parse(query), maxHits); //reader.numDocs());
-            TopDocs docs = isearcher.search(bq, maxHits); //reader.numDocs());
+            //TopDocs docs = isearcher.search(qp.parse(query), maxHits); //reader.numDocs());  
+            Sort sort = new Sort(SortField.FIELD_DOC);
+            TopDocs docs = isearcher.search(qp.parse(query), null, maxHits, sort); //reader.numDocs());
+ 
+            //TopDocs docs = isearcher.search(bq, maxHits); //reader.numDocs());
  
             long stopTime = System.currentTimeMillis();
             if (benchmark == true)
@@ -184,9 +190,9 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
                 //System.out.println("ret " + i + " ");
                 ret.put(reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0], reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0]); //docs.scoreDocs[i].score);
             }
-        //} catch (ParseException e) {
-        //    e.printStackTrace();
-        //}
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         return calculateDistance(feature_vector, ret);
 
