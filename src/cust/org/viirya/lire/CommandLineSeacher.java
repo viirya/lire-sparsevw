@@ -33,7 +33,7 @@ public class CommandLineSeacher {
 
     public static void search(String index_path, String identifier, String threshold) throws IOException {
         IndexReader reader = IndexReader.open(FSDirectory.open(new File(index_path)));
-        SiftLocalFeatureHistogramSparseImageSearcher searcher = new SiftLocalFeatureHistogramSparseImageSearcher(100);
+        SiftLocalFeatureHistogramSparseImageSearcher searcher = new SiftLocalFeatureHistogramSparseImageSearcher(1000);
         /*
         HashMap topDocs = searcher.searchByIdentifier(identifier, reader);
         Set set = topDocs.entrySet();

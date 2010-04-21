@@ -49,7 +49,9 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
     private QueryParser qp_identifier = null;
     private IndexSearcher isearcher = null;
     private boolean inited = false;
-
+ 
+    private double session_mag_query = 0.0d;
+ 
     public SiftLocalFeatureHistogramSparseImageSearcher(int maxHits) {
         this.maxHits = maxHits;
         docs = new TreeSet<SimpleResult>();
@@ -85,7 +87,8 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
         String feature_vector = null;
         try {
             TopDocs docs = isearcher.search(qp_identifier.parse(docIdentifier), 1);
-            feature_vector = reader.document(docs.scoreDocs[0].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
+            if (docs != null && docs.totalHits > 0)
+                feature_vector = reader.document(docs.scoreDocs[0].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -178,7 +181,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
             long startTime = System.currentTimeMillis();
             //TopDocs docs = isearcher.search(qp.parse(query), maxHits); //reader.numDocs());  
             Sort sort = new Sort(SortField.FIELD_DOC);
-            TopDocs docs = isearcher.search(qp.parse(query), null, maxHits, sort); //reader.numDocs());
+            TopDocs docs = isearcher.search(qp.parse(query), null, 5000, sort); //reader.numDocs());
  
             //TopDocs docs = isearcher.search(bq, maxHits); //reader.numDocs());
  
@@ -226,9 +229,13 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
                 doc.put(tokenizer.nextToken(), tokenizer.nextToken());
             }
 
-            ret.put(docID, new Double(calculateDistance(query, doc)));
+            double distance = calculateDistance(query, doc);
+            if (distance <= 0.1d)
+                continue;
+            ret.put(docID, new Double(distance));
         }
 
+        session_mag_query = 0.0d;
 
         /* try to sort the results */
         List<Map.Entry<String, Double>> list = new Vector<Map.Entry<String, Double>>(ret.entrySet());
@@ -269,7 +276,8 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
                 dot_product +=  query_value * doc_value;
                 
             }
-            mag_query += Math.pow(query_value, 2.0d);
+            if (session_mag_query <= 0.0d) 
+                mag_query += Math.pow(query_value, 2.0d);
         }
 
         set = doc.entrySet();
@@ -279,11 +287,14 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
             double doc_value = Double.parseDouble((String)me.getValue());
             mag_doc += Math.pow(doc_value, 2.0d);
         }
-
-        mag_query = Math.sqrt(mag_query);
+        
+        if (session_mag_query <= 0.0d) {
+            mag_query = Math.sqrt(mag_query);
+            session_mag_query = mag_query;
+        }
         mag_doc = Math.sqrt(mag_doc);
 
-        return dot_product / (mag_query * mag_doc);
+        return dot_product / (session_mag_query * mag_doc);
         
     }
 
