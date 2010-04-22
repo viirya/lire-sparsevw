@@ -51,8 +51,22 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
     public SparseVisualWordDocumentBuilder() {
     }
     
-
+    private String arrayToVisualWordString(int[] iarray, String prefix, String postfix) {
+        StringBuilder sb = new StringBuilder(1024);
+        for (int i = 0; i < iarray.length; i++) {
+            if (iarray[i] > 0) {
+                if (sb.length() > 0)
+                    sb.append(postfix);
+                sb.append(prefix + 'v');
+                sb.append(iarray[i]);
+            }
+        }
+        return sb.toString();
+    }                              
+ 
     private String arrayToVisualWordString(int[] iarray, String prefix) {
+        return arrayToVisualWordString(iarray, prefix, " ");
+        /*
         StringBuilder sb = new StringBuilder(1024);
         for (int i = 0; i < iarray.length; i++) {
             if (iarray[i] > 0) {
@@ -62,13 +76,18 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
             }
         }
         return sb.toString();
+        */
     }                              
  
     public String createStringRepresentation(String vec) {
-        return createStringRepresentation(vec, "", 0.0d);
+        return createStringRepresentation(vec, "", " ", 0.0d);
     }
- 
+
     public String createStringRepresentation(String vec, String prefix, double threshold) {
+        return createStringRepresentation(vec, prefix, " ", threshold);
+    }
+     
+    public String createStringRepresentation(String vec, String prefix, String postfix, double threshold) {
         if (vec == null)
           return null;
 
@@ -85,7 +104,7 @@ public class SparseVisualWordDocumentBuilder extends AbstractDocumentBuilder {
             }
         }
 
-        String index_feature = arrayToVisualWordString(dim_array, prefix); 
+        String index_feature = arrayToVisualWordString(dim_array, prefix, postfix);
 
         return index_feature;
     }

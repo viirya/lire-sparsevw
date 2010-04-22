@@ -120,7 +120,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
 
         BooleanQuery.setMaxClauseCount(100000);
         SparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getSparseVisualWordDocumentBuilder();
-        String query = builder.createStringRepresentation(feature_vector, "", threshold);
+        String query = builder.createStringRepresentation(feature_vector, "+", " AND ", threshold);
         if (query == null || query.length() == 0)
             return null;
         System.out.println("query = " + query);
