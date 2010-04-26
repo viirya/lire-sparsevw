@@ -51,6 +51,9 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
     private boolean inited = false;
  
     private double session_mag_query = 0.0d;
+
+    private List<String> doc_list = null;
+    private List<Double> doc_score_list = null;
  
     public SiftLocalFeatureHistogramSparseImageSearcher(int maxHits) {
         this.maxHits = maxHits;
@@ -86,9 +89,13 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
 
         String feature_vector = null;
         try {
-            TopDocs docs = isearcher.search(qp_identifier.parse(docIdentifier), 1);
-            if (docs != null && docs.totalHits > 0)
+            TopDocs docs = isearcher.search(qp_identifier.parse('"' + docIdentifier + '"'), 1);
+            if (docs != null && docs.totalHits > 0) {
                 feature_vector = reader.document(docs.scoreDocs[0].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
+                System.out.println("found " + docIdentifier);
+            } else
+                System.out.println("not found.");
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -113,23 +120,6 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
         qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
         qp_identifier = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_IDENTIFIER, new WhitespaceAnalyzer());
         isearcher = new IndexSearcher(reader);
-        inited = true;
-    }
-
-    public List<Map.Entry<String, Double>> search(String feature_vector, IndexReader reader, double threshold, boolean benchmark) throws IOException {
-
-        BooleanQuery.setMaxClauseCount(100000);
-        SparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getSparseVisualWordDocumentBuilder();
-        String query = builder.createStringRepresentation(feature_vector, "+", " AND ", threshold);
-        if (query == null || query.length() == 0)
-            return null;
-        System.out.println("query = " + query);
-
-        if (inited != true) { 
-            qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
-            isearcher = new IndexSearcher(reader);
-        }
-        
         isearcher.setSimilarity(new Similarity() {
             @Override
             public float lengthNorm(String s, int i) {
@@ -154,8 +144,8 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
 
             @Override
             public float idf(int docfreq, int numdocs) {
-                return 1.0f;  //To change body of implemented methods use File | Settings | File Templates.
-//                return (float) (1d+Math.log((double) numdocs/(double) docfreq));  //To change body of implemented methods use File | Settings | File Templates.
+                //return 1.0f;  //To change body of implemented methods use File | Settings | File Templates.
+                return (float) (1d+Math.log((double) numdocs/(double) docfreq));  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
@@ -164,6 +154,24 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
                 //return 1;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });
+ 
+        inited = true;
+    }
+
+    public List<Map.Entry<String, Double>> search(String feature_vector, IndexReader reader, double threshold, boolean benchmark) throws IOException {
+
+        BooleanQuery.setMaxClauseCount(100000);
+        SparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getSparseVisualWordDocumentBuilder();
+        String query = builder.createStringRepresentation(feature_vector, "", threshold);
+        if (query == null || query.length() == 0)
+            return null;
+        System.out.println("query = " + query);
+
+        if (inited != true) { 
+            qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
+            isearcher = new IndexSearcher(reader);
+        }
+        
         /*
         BooleanQuery bq = new BooleanQuery();
         String[] terms = query.split(" ");
@@ -177,27 +185,55 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
         */
 
         HashMap ret = new HashMap();
+        HashMap lucene_ret = new HashMap();
+        List<Map.Entry<String, Double>> lucene_sorted_ret = new Vector<Map.Entry<String, Double>>();
         try {
             long startTime = System.currentTimeMillis();
-            //TopDocs docs = isearcher.search(qp.parse(query), maxHits); //reader.numDocs());  
-            Sort sort = new Sort(SortField.FIELD_DOC);
-            TopDocs docs = isearcher.search(qp.parse(query), null, 5000, sort); //reader.numDocs());
+
+            Sort sort = new Sort();
+            TopDocs docs = isearcher.search(qp.parse(query), reader.numDocs()); //reader.numDocs());  
+
+            /* do not compute similarity */
+            //Sort sort = new Sort(SortField.FIELD_DOC);
+            //TopDocs docs = isearcher.search(qp.parse(query), null, 5000, sort); //reader.numDocs());
  
+            /* using boolean query */
             //TopDocs docs = isearcher.search(bq, maxHits); //reader.numDocs());
  
             long stopTime = System.currentTimeMillis();
             if (benchmark == true)
                 System.out.println("Total time: " + (stopTime - startTime) + " ms");
             System.out.println("found: " + docs.scoreDocs.length + " docs.");
-            for (int i = 0; i < docs.scoreDocs.length; i++) {
+            for (int i = 0; i < docs.scoreDocs.length && i < maxHits; i++) {
                 //System.out.println("ret " + i + " ");
-                ret.put(reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0], reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0]); //docs.scoreDocs[i].score);
+                if (Float.isNaN(docs.scoreDocs[i].score))
+                    continue;
+                String doc_id = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
+                String raw_feature = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
+                //System.out.println(raw_feature);
+                //ret.put(doc_id, raw_feature);
+
+                //lucene_ret.put(doc_id, new Double(docs.scoreDocs[i].score));
+                //System.out.println(docs.scoreDocs[i].score);
+                lucene_sorted_ret.add(new AbstractMap.SimpleEntry<String, Double>(doc_id, new Double(docs.scoreDocs[i].score)));
             }
+            
+            //lucene_sorted_ret = new Vector<Map.Entry<String, Double>>(lucene_ret.entrySet());
+            /*
+            System.out.println("start to sort.....");
+            java.util.Collections.sort(lucene_sorted_ret, new Comparator<Map.Entry<String, Double>>() {
+                public int compare(Map.Entry<String, Double> entry, Map.Entry<String, Double> entry1) {
+                    // Return 0 for a match, -1 for less than and +1 for more then
+                    return (entry.getValue().equals(entry1.getValue()) ? 0 : (entry.getValue() > entry1.getValue() ? -1 : 1));
+                }
+            });
+            */
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return calculateDistance(feature_vector, ret);
+        return lucene_sorted_ret; //calculateDistance(feature_vector, ret);
 
     }
 
@@ -230,8 +266,8 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
             }
 
             double distance = calculateDistance(query, doc);
-            if (distance <= 0.1d)
-                continue;
+            //if (distance <= 0.1d)
+            //    continue;
             ret.put(docID, new Double(distance));
         }
 
