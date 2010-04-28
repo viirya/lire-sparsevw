@@ -23,17 +23,17 @@ import java.util.*;
 
 /**
  * 
- * Date: 18.04.2010
+ * Date: 28.04.2010
  * Time: 
  *
  * @author Viirya, viirya@gmail.com
  */
-public class CommandLineSeacher {
+public class CommandLineSeacherRegion {
 
 
     public static void search(String index_path, String identifier, String threshold) throws IOException {
         IndexReader reader = IndexReader.open(FSDirectory.open(new File(index_path)));
-        SiftLocalFeatureHistogramSparseImageSearcher searcher = new SiftLocalFeatureHistogramSparseImageSearcher(1000);
+        RegionSiftLocalFeatureHistogramSparseImageSearcher searcher = new RegionSiftLocalFeatureHistogramSparseImageSearcher(1000);
         /*
         HashMap topDocs = searcher.searchByIdentifier(identifier, reader);
         Set set = topDocs.entrySet();
@@ -45,7 +45,7 @@ public class CommandLineSeacher {
             System.out.println(me.getKey() + " : " + me.getValue() );
         }
         */
-        List<Map.Entry<String, Double>> list = searcher.searchByIdentifier(identifier, reader, Double.parseDouble(threshold), true);
+        List<Map.Entry<String, Double>> list = searcher.searchByIdentifier(identifier, reader, Integer.parseInt(threshold), true);
         if (list != null) 
             for (Map.Entry<String, Double> entry: list) {
                 System.out.println(entry.getKey() + ": " + entry.getValue());
@@ -56,7 +56,7 @@ public class CommandLineSeacher {
 
     public static void main (String[] args) throws IOException {
       if (args.length != 3) {
-          System.err.println("Usage: CommandLineSeacher [index path] [docIdentifier]");
+          System.err.println("Usage: CommandLineSeacherRegion [index path] [docIdentifier] [vw count threshold]");
           System.exit(1);
       }
       search(args[0], args[1], args[2]);

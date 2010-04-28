@@ -6,6 +6,8 @@ import net.semanticmetadata.lire.impl.CorrelogramDocumentBuilder;
 import net.semanticmetadata.lire.impl.GenericDocumentBuilder;
 import net.semanticmetadata.lire.impl.SimpleDocumentBuilder;
 import net.semanticmetadata.lire.impl.SparseVisualWordDocumentBuilder;
+import net.semanticmetadata.lire.impl.RegionSparseVisualWordDocumentBuilder;
+ 
 
 /*
  * This file is part of the Caliph and Emir project: http://www.SemanticMetadata.net.
@@ -122,6 +124,10 @@ public class DocumentBuilderFactory {
         return new SparseVisualWordDocumentBuilder();
     }
 
+    public static RegionSparseVisualWordDocumentBuilder getRegionSparseVisualWordDocumentBuilder() {
+        return new RegionSparseVisualWordDocumentBuilder();
+    }
+ 
     /**
      * Creates a DocumentBuilder for the AutoColorCorrelation feature. Note that the extraction of this feature
      * is especially slow! So use it only on small images! Images that do not fit in a 200x200 pixel box are

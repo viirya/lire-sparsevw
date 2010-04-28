@@ -41,19 +41,19 @@ import java.util.logging.Logger;
  * @author viirya, viirya@gmail.com
  */
 public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageSearcher {
-    private Logger logger = Logger.getLogger(getClass().getName());
-    private TreeSet<SimpleResult> docs;
-    private int maxHits;
+    protected Logger logger = Logger.getLogger(getClass().getName());
+    protected TreeSet<SimpleResult> docs;
+    protected int maxHits;
 
-    private QueryParser qp = null;
-    private QueryParser qp_identifier = null;
-    private IndexSearcher isearcher = null;
-    private boolean inited = false;
+    protected QueryParser qp = null;
+    protected QueryParser qp_identifier = null;
+    protected IndexSearcher isearcher = null;
+    protected boolean inited = false;
  
-    private double session_mag_query = 0.0d;
+    protected double session_mag_query = 0.0d;
 
-    private List<String> doc_list = null;
-    private List<Double> doc_score_list = null;
+    protected List<String> doc_list = null;
+    protected List<Double> doc_score_list = null;
  
     public SiftLocalFeatureHistogramSparseImageSearcher(int maxHits) {
         this.maxHits = maxHits;
@@ -238,7 +238,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
     }
 
 
-    private List<Map.Entry<String, Double>> calculateDistance(String query_vec, HashMap topDocs) {
+    protected List<Map.Entry<String, Double>> calculateDistance(String query_vec, HashMap topDocs) {
 
         StringTokenizer tokenizer = new StringTokenizer(query_vec, ":,");
          
@@ -295,7 +295,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
 
     }
 
-    private double calculateDistance(HashMap query, HashMap doc) {
+    protected double calculateDistance(HashMap query, HashMap doc) {
 
         Set set = query.entrySet();
         Iterator i = set.iterator();
@@ -334,7 +334,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
         
     }
 
-    private int[] createHistogram(String cls) {
+    protected int[] createHistogram(String cls) {
         String[] tmp = cls.split(" ");
         int[] hist = new int[tmp.length];
         for (int i = 0; i < hist.length; i++) {
@@ -343,7 +343,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
         return hist;
     }
 
-    private float findSimilar(IndexReader reader, int[] hist) throws IOException {
+    protected float findSimilar(IndexReader reader, int[] hist) throws IOException {
         float maxDistance = -1f, overallMaxDistance = -1f;
         boolean hasDeletions = reader.hasDeletions();
 
@@ -385,7 +385,7 @@ public class SiftLocalFeatureHistogramSparseImageSearcher extends AbstractImageS
         return maxDistance;
     }
 
-    private float getDistance(Document d, int[] hist) {
+    protected float getDistance(Document d, int[] hist) {
         String[] cls = d.getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM);
         int[] hist2 = createHistogram(cls[0]);
         float result = 0f;
