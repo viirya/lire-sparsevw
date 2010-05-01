@@ -25,6 +25,7 @@ import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 
 
 import java.awt.image.BufferedImage;
@@ -51,7 +52,7 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
 
     public List<Map.Entry<String, Double>> searchByRawFeatures(String feature_vec, IndexReader reader, int threshold, boolean benchmark) throws IOException {
         RegionSparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getRegionSparseVisualWordDocumentBuilder();
-        String features = builder.createStringRepresentation(feature_vec, "", "", threshold, false);
+        String features = builder.createStringRepresentation(feature_vec, "", "", threshold, false, false);
         if (features != null)
             return search(features, reader, threshold, benchmark);
 
@@ -87,9 +88,10 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
     }          
 
     public void init(IndexReader reader) throws IOException {
-        qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
+        qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new WhitespaceAnalyzer());
         qp_identifier = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_IDENTIFIER, new WhitespaceAnalyzer());
         isearcher = new IndexSearcher(reader);
+        
         isearcher.setSimilarity(new Similarity() {
             @Override
             public float lengthNorm(String s, int i) {
@@ -108,23 +110,23 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
 
             @Override
             public float tf(float v) {
-                return v;
+                return 1.0f;
                 //return v;  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
             public float idf(int docfreq, int numdocs) {
-                //return 1.0f;  //To change body of implemented methods use File | Settings | File Templates.
-                return (float) (1d+Math.log((double) numdocs/(double) docfreq));  //To change body of implemented methods use File | Settings | File Templates.
+                return 1.0f;  //To change body of implemented methods use File | Settings | File Templates.
+                //return (float) (1d+Math.log((double) numdocs/(double) docfreq));  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
             public float coord(int i, int i1) {
-                return (float)i / i1; 
-                //return 1;  //To change body of implemented methods use File | Settings | File Templates.
+                //return (float)i / i1; 
+                return 1;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });
- 
+        
         inited = true;
     }
 
@@ -133,14 +135,14 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
         BooleanQuery.setMaxClauseCount(100000);
         RegionSparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getRegionSparseVisualWordDocumentBuilder();
 
-        String query = feature_vector;
+        String query = builder.createStringRepresentation(feature_vector, "", " ", threshold, false,false);
 
         if (query == null || query.length() == 0)
             return null;
         System.out.println("query = " + query);
 
         if (inited != true) { 
-            qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new SimpleAnalyzer());
+            qp = new QueryParser(Version.LUCENE_30, DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, new WhitespaceAnalyzer());
             isearcher = new IndexSearcher(reader);
         }
         
@@ -170,7 +172,7 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
                     continue;
                 String doc_id = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
                 String raw_feature = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
-                //System.out.println(raw_feature);
+                System.out.println(raw_feature);
                 //ret.put(doc_id, raw_feature);
 
                 //lucene_ret.put(doc_id, new Double(docs.scoreDocs[i].score));

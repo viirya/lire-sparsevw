@@ -51,15 +51,22 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
     public RegionSparseVisualWordDocumentBuilder() {
     }
     
-    private String arrayToVisualWordString(int[] vw_dimen, int[] vw_count, String prefix, String postfix) {
+    private String arrayToVisualWordString(int[] vw_dimen, int[] vw_count, String prefix, String postfix, boolean with_quotes) {
         StringBuilder sb = new StringBuilder(1024);
         for (int i = 0; i < vw_dimen.length; i++) {
             if (vw_count[i] > 0) {
                 for (int j = 0; j < vw_count[i]; j++) { 
                     if (sb.length() > 0)
                         sb.append(postfix);
-                    sb.append(prefix + 'v');
-                    sb.append(vw_dimen[i]);
+                    if (with_quotes)
+                        sb.append(prefix + "\"vec");
+                    else
+                        sb.append(prefix + "vec");
+                    if (with_quotes)
+                        sb.append(vw_dimen[i] + "\"");
+                    else
+                        sb.append(vw_dimen[i]);
+ 
                 }
             }
         }
@@ -67,18 +74,18 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
     }                              
  
     private String arrayToVisualWordString(int[] vw_dimen, int[] vw_count, String prefix) {
-        return arrayToVisualWordString(vw_dimen, vw_count, prefix, " ");
+        return arrayToVisualWordString(vw_dimen, vw_count, prefix, " ", false);
     }                              
  
     public String createStringRepresentation(String vec) {
-        return createStringRepresentation(vec, "", " ", 0, true);
+        return createStringRepresentation(vec, "", " ", 0, true, false);
     }
 
     public String createStringRepresentation(String vec, String prefix, int threshold) {
-        return createStringRepresentation(vec, prefix, " ", threshold, true);
+        return createStringRepresentation(vec, prefix, " ", threshold, true, false);
     }
      
-    public String createStringRepresentation(String vec, String prefix, String postfix, int threshold, boolean type_index) {
+    public String createStringRepresentation(String vec, String prefix, String postfix, int threshold, boolean type_index, boolean with_quotes) {
         if (vec == null)
           return null;
 
@@ -101,7 +108,7 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
             }
         }
 
-        String index_feature = arrayToVisualWordString(dim_array, count_array, prefix, postfix);
+        String index_feature = arrayToVisualWordString(dim_array, count_array, prefix, postfix, with_quotes);
 
         return index_feature;
     }
@@ -118,8 +125,8 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
         //String raw_feature_vector = tokenizer.nextToken();
         //String identifier = tokenizer.nextToken();
         String raw_feature_vector = feature_vector;
-        String index_feature = createStringRepresentation(raw_feature_vector, "", threshold);
-        String query_feature = createStringRepresentation(raw_feature_vector, "", " ", threshold, false);
+        String index_feature = createStringRepresentation(raw_feature_vector, "", " ", threshold, false, false);
+        String query_feature = createStringRepresentation(raw_feature_vector, "", " ", threshold, false, false);
 
         //System.out.println("index: " + index_feature);
         //System.out.println("query: " + query_feature);
@@ -127,8 +134,8 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
         Document doc = new Document();
 
         if (index_feature != null) {
-            doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, index_feature, Field.Store.NO, Field.Index.ANALYZED));
-            doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW, query_feature, Field.Store.YES, Field.Index.NO));
+            doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, index_feature, Field.Store.YES, Field.Index.ANALYZED));
+            doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW, raw_feature_vector, Field.Store.YES, Field.Index.NO));
         }
              
 

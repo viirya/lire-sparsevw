@@ -5,9 +5,12 @@ import net.semanticmetadata.lire.impl.*;
 
 import net.semanticmetadata.lire.utils.FileUtils;
 import org.apache.lucene.analysis.SimpleAnalyzer;
+import org.apache.lucene.analysis.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.Version;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -27,7 +30,7 @@ public class CreateIndexRegion {
 
     public static void createIndex(String index_path, String feature_filepath, int threshold) throws IOException {
         RegionSparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getRegionSparseVisualWordDocumentBuilder();
-        IndexWriter iw = new IndexWriter(FSDirectory.open(new File(index_path)), new SimpleAnalyzer(), IndexWriter.MaxFieldLength.UNLIMITED);
+        IndexWriter iw = new IndexWriter(FSDirectory.open(new File(index_path)), new WhitespaceAnalyzer(), IndexWriter.MaxFieldLength.UNLIMITED);
 
         try {
             FileInputStream fstream = new FileInputStream(feature_filepath);
