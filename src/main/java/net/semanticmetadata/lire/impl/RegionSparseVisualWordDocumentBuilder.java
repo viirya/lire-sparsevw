@@ -134,7 +134,7 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
         Document doc = new Document();
 
         if (index_feature != null) {
-            doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, index_feature, Field.Store.YES, Field.Index.ANALYZED));
+            doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS, index_feature, Field.Store.NO, Field.Index.ANALYZED));
             doc.add(new Field(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW, raw_feature_vector, Field.Store.YES, Field.Index.NO));
         }
              
