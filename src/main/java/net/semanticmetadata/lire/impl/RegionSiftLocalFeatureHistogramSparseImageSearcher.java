@@ -172,7 +172,7 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
                     continue;
                 String doc_id = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
                 String raw_feature = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
-                System.out.println(raw_feature);
+                //System.out.println(raw_feature);
                 //ret.put(doc_id, raw_feature);
 
                 //lucene_ret.put(doc_id, new Double(docs.scoreDocs[i].score));
