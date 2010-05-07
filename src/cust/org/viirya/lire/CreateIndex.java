@@ -71,6 +71,7 @@ public class CreateIndex {
           System.exit(1);
       }
       createIndex(args[0], args[1], Double.parseDouble(args[2]));
+ 
     }
 
 }

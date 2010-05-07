@@ -117,7 +117,7 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
         return null;
     }
 
-    public Document createDocument(String feature_vector, String identifier, int threshold) {
+    public Document createDocument(String feature_vector, String identifier, int threshold, boolean freq_record) {
         assert (feature_vector != null);
         System.out.println("Starting to parse feature vector.");
 
@@ -125,7 +125,7 @@ public class RegionSparseVisualWordDocumentBuilder extends AbstractDocumentBuild
         //String raw_feature_vector = tokenizer.nextToken();
         //String identifier = tokenizer.nextToken();
         String raw_feature_vector = feature_vector;
-        String index_feature = createStringRepresentation(raw_feature_vector, "", " ", threshold, false, false);
+        String index_feature = createStringRepresentation(raw_feature_vector, "", " ", threshold, freq_record, false);
         String query_feature = createStringRepresentation(raw_feature_vector, "", " ", threshold, false, false);
 
         //System.out.println("index: " + index_feature);

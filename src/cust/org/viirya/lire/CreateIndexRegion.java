@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CreateIndexRegion {
 
-    public static void createIndex(String index_path, String feature_filepath, int threshold) throws IOException {
+    public static void createIndex(String index_path, String feature_filepath, int threshold, boolean freq_record) throws IOException {
         RegionSparseVisualWordDocumentBuilder builder = DocumentBuilderFactory.getRegionSparseVisualWordDocumentBuilder();
         IndexWriter iw = new IndexWriter(FSDirectory.open(new File(index_path)), new WhitespaceAnalyzer(), IndexWriter.MaxFieldLength.UNLIMITED);
 
@@ -56,7 +56,7 @@ public class CreateIndexRegion {
 
                 System.out.println("Indexing " + identifier + " ...");
 
-                Document doc = builder.createDocument(raw_feature_vector, identifier, threshold);
+                Document doc = builder.createDocument(raw_feature_vector, identifier, threshold, freq_record);
                 iw.addDocument(doc);
             }
             in.close();
@@ -69,11 +69,15 @@ public class CreateIndexRegion {
     }
 
     public static void main (String[] args) throws IOException {
-      if (args.length != 3) {
-          System.err.println("Usage: CreateIndexRegion [index path] [feature filepath] [vw count threshold]");
-          System.exit(1);
-      }
-      createIndex(args[0], args[1], Integer.parseInt(args[2]));
+        if (args.length != 4) {
+            System.err.println("Usage: CreateIndexRegion [index path] [feature filepath] [vw count threshold] [record frequency]");
+            System.exit(1);
+        }
+
+        if (args[3].equals("Y"))
+            createIndex(args[0], args[1], Integer.parseInt(args[2]), true);
+        else
+            createIndex(args[0], args[1], Integer.parseInt(args[2]), false); 
     }
 
 }
