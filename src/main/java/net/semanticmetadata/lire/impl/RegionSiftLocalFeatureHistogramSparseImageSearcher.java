@@ -110,8 +110,8 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
 
             @Override
             public float tf(float v) {
-                return 1.0f;
-                //return v;  //To change body of implemented methods use File | Settings | File Templates.
+                //return 1.0f;
+                return v;  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
@@ -172,6 +172,10 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
                     continue;
                 String doc_id = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
                 String raw_feature = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS_RAW)[0];
+
+                //String index_feature = reader.document(docs.scoreDocs[i].doc).getValues(DocumentBuilder.FIELD_NAME_SIFT_LOCAL_FEATURE_HISTOGRAM_SPARSE_VISUAL_WORDS)[0];
+                //System.out.println(index_feature);
+ 
                 //System.out.println(raw_feature);
                 //ret.put(doc_id, raw_feature);
 
