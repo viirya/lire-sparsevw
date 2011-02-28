@@ -137,6 +137,12 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
 
         String query = builder.createStringRepresentation(feature_vector, "", " ", threshold, false,false);
 
+        return search(reader, threshold, benchmark, query);
+
+    }
+
+    public List<Map.Entry<String, Double>> search(IndexReader reader, int threshold, boolean benchmark, String query) throws IOException {
+
         if (query == null || query.length() == 0)
             return null;
         System.out.println("query = " + query);
@@ -153,7 +159,7 @@ public class RegionSiftLocalFeatureHistogramSparseImageSearcher extends SiftLoca
             long startTime = System.currentTimeMillis();
 
             Sort sort = new Sort();
-            TopDocs docs = isearcher.search(qp.parse(query), reader.numDocs()); //reader.numDocs());  
+            TopDocs docs = isearcher.search(qp.parse(query), maxHits); //reader.numDocs());  
 
             /* do not compute similarity */
             //Sort sort = new Sort(SortField.FIELD_DOC);

@@ -48,7 +48,19 @@ public class HTTPSeacherRegion {
 
     private int threshold = 0;
 
-    public List<Map.Entry<String, Double>> search(String identifier) throws IOException {
+
+    public List<Map.Entry<String, Double>> searchByFeature(String features) throws IOException {
+
+        List<Map.Entry<String, Double>> list = null;
+        if (reader != null && features != null)
+            list = searcher.search(reader, threshold, true, features);
+        
+        return list;
+
+    }
+ 
+ 
+    public List<Map.Entry<String, Double>> searchByID(String identifier) throws IOException {
         /*
         IndexReader reader = IndexReader.open(FSDirectory.open(new File(index_path)));
         SiftLocalFeatureHistogramSparseImageSearcher searcher = new SiftLocalFeatureHistogramSparseImageSearcher(maxHits);
@@ -98,6 +110,8 @@ public class HTTPSeacherRegion {
                 Request base_request = (request instanceof Request) ? (Request)request:HttpConnection.getCurrentConnection().getRequest();
 
                 String identifier = base_request.getParameter("id");
+                String raw_feature = base_request.getParameter("feature");
+ 
                 
                 int sessionMaxHits = 100;
                 String param_Max = base_request.getParameter("max");
@@ -108,8 +122,12 @@ public class HTTPSeacherRegion {
         
                 response.setContentType("text/xml");
                 response.setStatus(HttpServletResponse.SC_OK);
-        
-                String retXML = toXML(search(identifier), sessionMaxHits);
+
+                String retXML = null;
+                if (identifier != null)        
+                    retXML = toXML(searchByID(identifier), sessionMaxHits);
+                else if (raw_feature != null)
+                    retXML = toXML(searchByFeature(raw_feature), sessionMaxHits);
         
                 response.getWriter().println(retXML);
         
